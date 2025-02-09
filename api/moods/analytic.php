@@ -17,10 +17,24 @@ try {
 
     $moods = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+
+    $sqlGroup = "SELECT level, COUNT(level) AS total FROM moods 
+                    WHERE 
+                    user_id = '$userId' AND created_at >= '$createdAt' 
+                    GROUP BY level
+                    ORDER BY level
+                    ";
+
+    $statementGroup = $conn->prepare($sqlGroup);
+    $statementGroup->execute();
+
+    $groups = $statementGroup->fetchAll(PDO::FETCH_ASSOC);
+
     $responseBody = array(
         "message" => "Success Fetch Data",
         "data" => array(
             "moods" => $moods,
+            "group" => $groups,
         )
     );
 

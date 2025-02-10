@@ -119,7 +119,7 @@ function migrateExpenses($conn)
                 title VARCHAR(100) NOT NULL,
                 category VARCHAR(20) NOT NULL,
                 date_expense DATE NOT NULL,
-                expense DOUBLE(10,2) NOT NULL,
+                expense DOUBLE(10,3) NOT NULL,
                 description TEXT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

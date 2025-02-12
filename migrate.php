@@ -76,6 +76,7 @@ function migrateSolutions($conn)
                 user_id INT(11) UNSIGNED,
                 summary TEXT NOT NULL,
                 problem TEXT NOT NULL,
+                solution TEXT NOT NULL,
                 reference TEXT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

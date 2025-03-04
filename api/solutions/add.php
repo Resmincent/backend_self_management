@@ -15,7 +15,7 @@ try {
     $sqlInsert = "INSERT INTO solutions 
                 (user_id,summary ,problem, solution,reference)
                 VALUES
-                ('$userId', '$summary', '$problem', '$reference', '$solution')
+                ('$userId', '$summary', '$problem', '$solution', '$reference')
                 ";
 
     $conn->exec($sqlInsert);

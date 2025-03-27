@@ -7,7 +7,7 @@ $userId = $_POST['user_id'];
 
 try {
     // Query untuk mengambil semua data Safe Place berdasarkan user_id
-    $sql = "SELECT id, type, title, content, file_path, created_at FROM safe_places 
+    $sql = "SELECT id, type, title, content, created_at FROM safe_places 
             WHERE user_id = :user_id
             ORDER BY created_at DESC";
 

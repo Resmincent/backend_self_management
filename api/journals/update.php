@@ -7,7 +7,6 @@ $userId = $_POST['user_id'];
 $category = $_POST['category'];
 $title = $_POST['title'];
 $content = $_POST['content'];
-$reference = $_POST['reference'];
 $id = $_POST['id'];
 
 try {

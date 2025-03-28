@@ -143,7 +143,6 @@ function migrateJournal($conn)
                 category VARCHAR(20) NOT NULL,
                 title VARCHAR(255) DEFAULT NULL,
                 content TEXT DEFAULT NULL,
-                journal_date DATE NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                 )";

@@ -14,7 +14,6 @@ try {
             AND (
                 category LIKE :query OR
                 title LIKE :query OR
-                journal_date LIKE :query OR
                 content LIKE :query
             )";
 

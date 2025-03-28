@@ -6,15 +6,14 @@ require "../response.php";
 $userId = $_POST['user_id'];
 $category = $_POST['category'];
 $title = $_POST['title'];
-$journalDate = $_POST['journal_date'];
 $content = $_POST['content'];
 
 
 try {
     $sql = "INSERT INTO journals
-                (user_id, category, title, journal_date, content)
+                (user_id, category, title, content)
                 VALUES
-                ('$userId', '$category', '$title', '$journalDate', '$content')
+                ('$userId', '$category', '$title', '$content')
                 ";
 
     $conn->exec($sql);

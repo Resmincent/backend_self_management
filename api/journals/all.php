@@ -6,7 +6,7 @@ require "../response.php";
 $userId = $_POST['user_id'];
 
 try {
-    $sql = "SELECT id, category, title, journal_date, content FROM journals
+    $sql = "SELECT id, category, title, content FROM journals
                     WHERE
                     user_id = '$userId'
                     ORDER BY title

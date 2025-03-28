@@ -22,7 +22,7 @@ try {
     migrateSolutions($conn);
     migrateAgendas($conn);
     migrateExpenses($conn);
-    migrateSafePlace($conn);
+    migrateJournal($conn);
 
     $conn = null;
 } catch (PDOException $e) {
@@ -134,21 +134,22 @@ function migrateExpenses($conn)
     }
 }
 
-function migrateSafePlace($conn)
+function migrateJournal($conn)
 {
     try {
-        $sql = "CREATE TABLE safe_places (
+        $sql = "CREATE TABLE journals (
                 id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                 user_id INT(11) UNSIGNED,
-                type ENUM('journal', 'audio') NOT NULL,
+                category VARCHAR(20) NOT NULL,
                 title VARCHAR(255) DEFAULT NULL,
                 content TEXT DEFAULT NULL,
+                journal_date DATE NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                 )";
 
         $conn->exec($sql);
-        echo "Table safe_places created successfully\n";
+        echo "Table journals created successfully\n";
     } catch (PDOException $e) {
         echo $e->getMessage() . "\n";
     }

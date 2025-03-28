@@ -6,29 +6,29 @@ require "../response.php";
 $userId = $_POST['user_id'];
 
 try {
-    // Query untuk mengambil semua data Safe Place berdasarkan user_id
-    $sql = "SELECT id, type, title, content, created_at FROM safe_places 
-            WHERE user_id = :user_id
-            ORDER BY created_at DESC";
+    $sql = "SELECT id, category, title, journal_date, content FROM journals
+                    WHERE
+                    user_id = '$userId'
+                    ORDER BY title
+                    ";
 
     $statement = $conn->prepare($sql);
-    $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $statement->execute();
 
-    $safePlaces = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $journals = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     $responseBody = array(
         "message" => "Success Fetch Data",
         "data" => array(
-            "safe_places" => $safePlaces,
+            "journals" => $journals,
         )
     );
 
     sendResponse(200, $responseBody);
 } catch (PDOException $e) {
-    $responseBody = array(
+    $responseBody =  array(
         "message" => "Something went wrong",
-        "error" => $e->getMessage(),
+        "error" =>  $e->getMessage(),
     );
     sendResponse(500, $responseBody);
 } finally {

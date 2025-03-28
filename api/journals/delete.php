@@ -6,13 +6,23 @@ require "../response.php";
 $id = $_GET['id'];
 
 try {
-    // Hapus dari database
-    $sql = "DELETE FROM safe_places WHERE id = :id";
+    $sql = "DELETE FROM journals WHERE id = :id";
     $statement = $conn->prepare($sql);
     $statement->bindParam(':id', $id, PDO::PARAM_INT);
     $statement->execute();
 
-    $responseBody = array("message" => "Success Delete Data");
+    if ($statement->rowCount() === 0) {
+        $responseBody = array(
+            "message" => "Not Found",
+        );
+        sendResponse(404, $responseBody);
+        exit;
+    }
+
+    $responseBody = array(
+        "message" => "Success Delete Data",
+    );
+
     sendResponse(200, $responseBody);
 } catch (PDOException $e) {
     $responseBody = array(

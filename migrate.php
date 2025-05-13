@@ -23,6 +23,9 @@ try {
     migrateAgendas($conn);
     migrateExpenses($conn);
     migrateJournal($conn);
+    migrateGoals($conn);
+
+    echo "All Tables Created Successfully\n";
 
     $conn = null;
 } catch (PDOException $e) {
@@ -149,6 +152,28 @@ function migrateJournal($conn)
 
         $conn->exec($sql);
         echo "Table journals created successfully\n";
+    } catch (PDOException $e) {
+        echo $e->getMessage() . "\n";
+    }
+}
+
+
+function migrateGoals($conn)
+
+{
+    try {
+        $sql = "CREATE TABLE goals (
+                id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                user_id INT(11) UNSIGNED,
+                goal VARCHAR(100) NOT NULL,
+                is_daily boolean NOT NULL,
+                is_done boolean NOT NULL,
+                target_date DATETIME NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+                )";
+        $conn->exec($sql);
+        echo "Table goals created successfully\n";
     } catch (PDOException $e) {
         echo $e->getMessage() . "\n";
     }

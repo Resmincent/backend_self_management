@@ -178,3 +178,25 @@ function migrateGoals($conn)
         echo $e->getMessage() . "\n";
     }
 }
+
+function migrateIncomes($conn)
+{
+    try {
+        $sql = "CREATE TABLE incomes (
+                id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                user_id INT(11) UNSIGNED,
+                title VARCHAR(100) NOT NULL,
+                category VARCHAR(20) NOT NULL,
+                date_income DATE NOT NULL,
+                amount DOUBLE(10,3) NOT NULL,
+                description TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+                )";
+
+        $conn->exec($sql);
+        echo "Table insomes created successfully\n";
+    } catch (PDOException $e) {
+        echo $e->getMessage() . "\n";
+    }
+}

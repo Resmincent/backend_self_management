@@ -24,6 +24,7 @@ try {
     migrateExpenses($conn);
     migrateJournal($conn);
     migrateGoals($conn);
+    migrateIncomes($conn);
 
     echo "All Tables Created Successfully\n";
 
